@@ -16,9 +16,9 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 
-class DouBanSpider(object):
+class WebPageContentSpider(object):
     """类的简要说明
-    本类主要用于抓取豆瓣阅读Top前250的书籍的名称
+    本类主要用于抓取豆瓣图书Top前250的书籍的名称
 
     Attributes:
         page: 用于表示当前所处的抓取页面
@@ -30,11 +30,10 @@ class DouBanSpider(object):
     def __init__(self):
         self.page = 1
         self.cur_url = "https://book.douban.com/top250?start=0"
-        # self.cur_url = "http://movie.douban.com/top250?start={page}&filter=&type="
         # self.cur_url = "https://read.douban.com/reader/ebook/1296661/"
         self.datas = []
         self._top_num = 1
-        print "豆瓣电影爬虫准备就绪, 准备爬取数据..."
+        print "豆瓣图书爬虫准备就绪, 准备爬取数据..."
 
     def get_page(self, cur_page):
         """
@@ -67,10 +66,9 @@ class DouBanSpider(object):
             my_page: 传入页面的HTML文本用于正则匹配
         """
         temp_data = []
-        # movie_items = re.findall(r'<span.*?class="title">(.*?)</span>', my_page, re.S)
 
-        movie_items = re.findall(r'(?<=&#34; title=").*?(?=")', my_page, re.S)
-        for index, item in enumerate(movie_items):
+        content_items = re.findall(r'(?<=&#34; title=").*?(?=")', my_page, re.S)
+        for index, item in enumerate(content_items):
             if item.find("&nbsp") == -1:
                 temp_data.append("Top" + str(self._top_num) + " " + item)
                 self._top_num += 1
@@ -94,12 +92,12 @@ def main():
             Date: 2016-08-27
         ###############################
     """
-    my_spider = DouBanSpider()
+    my_spider = WebPageContentSpider()
     my_spider.start_spider()
     for item in my_spider.datas:
         print item
 
-    with open("movieTitle.txt", "w+") as my_file:
+    with open("OutputContent.txt", "w+") as my_file:
             for page in my_spider.datas:
                 my_file.write(page + "\n")
 
