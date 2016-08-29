@@ -101,7 +101,7 @@ def main():
             for page in my_spider.datas:
                 my_file.write(page + "\n")
 
-    print "豆瓣爬虫爬取结束..."
+    print "spider is  done..."
 
 
 if __name__ == '__main__':
