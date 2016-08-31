@@ -23,7 +23,7 @@ class DouBanSpider(object):
     Attributes:
         page: 用于表示当前所处的抓取页面
         cur_url: 用于表示当前争取抓取页面的url
-        datas: 存储处理好的抓取到的电影名称
+        datas: 存储处理好的抓取到的图书名称
         _top_num: 用于记录当前的top号码
     """
 
