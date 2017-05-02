@@ -29,7 +29,7 @@ class WebPageContentSpider(object):
 
     def __init__(self):
         self.page = 1
-        self.cur_url = "https://book.douban.com/top250?start=0"
+        self.cur_url = "https://book.douban.com/top250?start={page}"
         # self.cur_url = "https://read.douban.com/reader/ebook/1296661/"
         self.datas = []
         self._top_num = 1
